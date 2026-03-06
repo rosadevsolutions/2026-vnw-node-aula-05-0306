@@ -19,6 +19,55 @@ let proximoID = 1
 //7 - Configurando o express para receber dados no formato JSON
 app.use(express.json())
 
+//13 - Função para validar os campos de email
+function validarEmail(email) {
+  //14 - Expressão regular para validar o formato do email
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  //15 - Testando se o email corresponde ao padrão da expressão regular
+  return regexEmail.test(email)
+}
+
+//16 - Função para validar os campos de telefone
+function validarTelefone(telefone) {
+  //17 - Expressão regular para validar o formato do telefone
+  const regexTelefone = /^[0-9]{10,11}$/;
+
+  //18 - Testando se o telefone corresponde ao padrão da expressão regular
+  return regexTelefone.test(telefone)
+}
+
+//19 - Middleware para validar os campos de email e telefone
+function validarCadastro(req, res, next) {
+  //20 - Obtendo os dados do corpo da requisição
+  const { nome, email, telefone, mensagem } = req.body
+
+  //21 - Validando os campos de nome, email e telefone
+  if (!nome || nome.length < 2) {
+    return res.status(400).json({
+      erro: "Nome é obrigatório!"
+  })
+  }
+  if (!email || !validarEmail(email)) {
+    return res.status(400).json({
+      erro: "Email inválido!"
+    })
+  }
+  if (!telefone || !validarTelefone(telefone)) {
+    return res.status(400).json({
+      erro: "Telefone inválido!"
+    })
+  }
+  if (!mensagem || mensagem.length < 200) {
+    return res.status(400).json({
+      erro: "Mensagem é obrigatória!"
+    })
+  }
+
+  //22 - Se os campos forem válidos, continuar para a próxima rota
+  next()
+}
+
 //5 - Rota principal
 app.get("/", (req, res) => {
   res.send("API funcionando!")
