@@ -58,7 +58,7 @@ function validarCadastro(req, res, next) {
       erro: "Telefone inválido!"
     })
   }
-  if (!mensagem || mensagem.length < 200) {
+  if (!mensagem || mensagem.length < 500) {
     return res.status(400).json({
       erro: "Mensagem é obrigatória!"
     })
@@ -81,7 +81,7 @@ app.get("/cadastros", (req, res) => {
 
 
 //12 - Rota para cadastrar um novo usuário
-app.post("/cadastros", (req, res) => {
+app.post("/cadastros", validarCadastro, (req, res) => {
   //13 - Obtendo os dados do corpo da requisição
   const { nome, email, telefone, mensagem } = req.body
 
