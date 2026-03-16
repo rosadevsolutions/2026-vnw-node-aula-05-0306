@@ -14,7 +14,7 @@
 [LinkedIn](https://www.linkedin.com/company/vainaweb)
 [Instagram](https://www.instagram.com/wainaweb)
 
-# Desafio 01 - API Médicos e Dedntistas Voluntários<br>
+# Desafio 01 - API Médicos e Dentistas Voluntários<br>
 
 ---
 
